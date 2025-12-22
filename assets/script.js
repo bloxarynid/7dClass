@@ -10,7 +10,23 @@ let prevPhotoBtn, nextPhotoBtn, notification, notificationText;
 
 const users = [ ];
 
+// Tambahkan di awal initializeApp()
 function initializeApp() {
+    // Cek apakah sudah login dari localStorage
+    const savedToken = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (savedToken && savedUser) {
+        try {
+            currentUser = JSON.parse(savedUser);
+            isLoggedIn = true;
+            showPage('anggota-kelas');
+            showNotification(`Welcome back, ${currentUser.fullname}!`);
+        } catch (e) {
+            localStorage.clear();
+        }
+    }
+    
     hamburger = document.getElementById('hamburger-btn');
     sidebar = document.querySelector('.sidebar');
     pages = document.querySelectorAll('.page');
@@ -125,7 +141,7 @@ function showPage(pageId) {
     }
 }
 
-function login() {
+async function login() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     
@@ -142,24 +158,40 @@ function login() {
         return;
     }
     
-    const user = users.find(u => 
-        (u.username.toLowerCase() === username.toLowerCase() || 
-         u.fullname.toLowerCase() === username.toLowerCase()) && 
-        u.password === password
-    );
-    
-    if (user) {
-        currentUser = user;
-        isLoggedIn = true;
-        isGuestMode = false;
-        passwordInput.value = '';
-        showPage('anggota-kelas');
-        showNotification(`Selamat datang, ${user.fullname}!`);
-        if (window.anggotaData) renderAnggotaKelas();
-    } else {
-        showNotification('Username atau password salah!', true);
-        passwordInput.value = '';
-        passwordInput.focus();
+    try {
+        showNotification('Sedang login...');
+        
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Simpan token di localStorage
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            currentUser = data.user;
+            isLoggedIn = true;
+            isGuestMode = false;
+            
+            passwordInput.value = '';
+            showPage('anggota-kelas');
+            showNotification(`Selamat datang, ${data.user.fullname}!`);
+            if (window.anggotaData) renderAnggotaKelas();
+        } else {
+            showNotification(data.error || 'Login gagal!', true);
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showNotification('Koneksi error. Coba lagi!', true);
     }
 }
 
