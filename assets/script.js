@@ -8,25 +8,42 @@ let hamburger, sidebar, pages, loginBtn, guestLoginBtn, searchInput;
 let modalOverlay, modalClose, photoModal, photoModalClose;
 let prevPhotoBtn, nextPhotoBtn, notification, notificationText;
 
-const users = [ ];
+const users = [
+    { username: "abiyyu", password: "abiyyu123", fullname: "Abiyyu Nocherino Revantara" },
+    { username: "ahmed", password: "ahmed123", fullname: "Ahmed Fadee Aisyhafiy" },
+    { username: "alifah", password: "alifah123", fullname: "Alifah Adeliza" },
+    { username: "amalia", password: "amalia123", fullname: "Amalia Rezki Azizi" },
+    { username: "argani", password: "argani123", fullname: "Argani Wisnu Wibisana" },
+    { username: "arni", password: "arni123", fullname: "Arni Rahmadhani" },
+    { username: "aryasatya", password: "aryasatya123", fullname: "Aryasatya Byakta" },
+    { username: "azelia", password: "azelia123", fullname: "Azelia Nur Azzahra" },
+    { username: "azzam", password: "azzam123", fullname: "Azzam Amanullah" },
+    { username: "denessia", password: "denessia123", fullname: "Denessia Fahia Mahya" },
+    { username: "dwika", password: "dwika123", fullname: "Dwika Hadi Wijaya" },
+    { username: "erfira", password: "erfira123", fullname: "Erfira Anggraeni" },
+    { username: "farzan", password: "farzan123", fullname: "Farzan Ahza Argani" },
+    { username: "firli", password: "firli123", fullname: "Firli Alisa Rahma" },
+    { username: "ghatfaan", password: "ghatfaan123", fullname: "Ghatfaan Fayaadh Aufaa" },
+    { username: "hartts", password: "hartts123", fullname: "Harist Abdul Hakim" },
+    { username: "joshua", password: "joshua123", fullname: "Joshua Veddyttarro" },
+    { username: "keisha", password: "keisha123", fullname: "Keisha Novelis Nafeeza Zaafarani" },
+    { username: "kirana", password: "kirana123", fullname: "Kirana Kamalia Ayu Wardaniningrum" },
+    { username: "mohammad", password: "mohammad123", fullname: "Mohammad Asadell Akhtar" },
+    { username: "muhammad", password: "muhammad123", fullname: "Muhammad Ardiansyah" },
+    { username: "mutia", password: "mutia123", fullname: "Mutia Almas Fatimatuzzahra" },
+    { username: "nafis", password: "nafis123", fullname: "Nafis Prawiro" },
+    { username: "nara", password: "nara123", fullname: "Nara Ayu Apriliani" },
+    { username: "priska", password: "priska123", fullname: "Priska Oktaviana" },
+    { username: "rajendra", password: "rajendra123", fullname: "Rajendra Veron Alerea" },
+    { username: "reina", password: "reina123", fullname: "Reina Al Yasmin" },
+    { username: "riyan", password: "riyan123", fullname: "Riyan Ade Saputra" },
+    { username: "selena", password: "selena123", fullname: "Selena Zayna Tatum" },
+    { username: "shafin", password: "shafin123", fullname: "Shafin Althaf" },
+    { username: "zabarjad", password: "zabarjad123", fullname: "Zabarjad Nibras Alzain" },
+    { username: "zauhair", password: "zauhair123", fullname: "Zauhair Rakha Adi" }
+];
 
-// Tambahkan di awal initializeApp()
 function initializeApp() {
-    // Cek apakah sudah login dari localStorage
-    const savedToken = localStorage.getItem('token');
-    const savedUser = localStorage.getItem('user');
-    
-    if (savedToken && savedUser) {
-        try {
-            currentUser = JSON.parse(savedUser);
-            isLoggedIn = true;
-            showPage('anggota-kelas');
-            showNotification(`Welcome back, ${currentUser.fullname}!`);
-        } catch (e) {
-            localStorage.clear();
-        }
-    }
-    
     hamburger = document.getElementById('hamburger-btn');
     sidebar = document.querySelector('.sidebar');
     pages = document.querySelectorAll('.page');
@@ -141,7 +158,7 @@ function showPage(pageId) {
     }
 }
 
-async function login() {
+function login() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     
@@ -158,40 +175,24 @@ async function login() {
         return;
     }
     
-    try {
-        showNotification('Sedang login...');
-        
-        const response = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password })
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            // Simpan token di localStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-            
-            currentUser = data.user;
-            isLoggedIn = true;
-            isGuestMode = false;
-            
-            passwordInput.value = '';
-            showPage('anggota-kelas');
-            showNotification(`Selamat datang, ${data.user.fullname}!`);
-            if (window.anggotaData) renderAnggotaKelas();
-        } else {
-            showNotification(data.error || 'Login gagal!', true);
-            passwordInput.value = '';
-            passwordInput.focus();
-        }
-    } catch (error) {
-        console.error('Login error:', error);
-        showNotification('Koneksi error. Coba lagi!', true);
+    const user = users.find(u => 
+        (u.username.toLowerCase() === username.toLowerCase() || 
+         u.fullname.toLowerCase() === username.toLowerCase()) && 
+        u.password === password
+    );
+    
+    if (user) {
+        currentUser = user;
+        isLoggedIn = true;
+        isGuestMode = false;
+        passwordInput.value = '';
+        showPage('anggota-kelas');
+        showNotification(`Selamat datang, ${user.fullname}!`);
+        if (window.anggotaData) renderAnggotaKelas();
+    } else {
+        showNotification('Username atau password salah!', true);
+        passwordInput.value = '';
+        passwordInput.focus();
     }
 }
 
