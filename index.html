@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Kelas 7D - SMPN 2 Banjarnegara</title>
+    <link rel="icon" type="image/png" href="icon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/mycss.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-school"></i>
+            <div>
+                <h1>SMPN 2 Banjarnegara</h1>
+                <p>Kelas 7D - Portal Resmi</p>
+            </div>
+        </div>
+        
+        <button class="hamburger" id="hamburger-btn">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </button>
+    </header>
+
+    <nav class="sidebar">
+        <ul class="accordion-menu" id="sidebar-menu">
+            <li class="accordion-item">
+                <div class="accordion-header">
+                    <span><i class="fas fa-users"></i> Anggota Kelas</span>
+                    <i class="fas fa-chevron-down accordion-arrow"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul class="sub-menu">
+                        <li onclick="showPage('anggota-kelas')">Daftar Anggota</li>
+                        <li onclick="showPage('organisasi-kelas')">Struktur Organisasi</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="accordion-item">
+                <div class="accordion-header">
+                    <span><i class="fas fa-calendar-alt"></i> Jadwal</span>
+                    <i class="fas fa-chevron-down accordion-arrow"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul class="sub-menu">
+                        <li onclick="showPage('jadwal-pelajaran')">Jadwal Pelajaran</li>
+                        <li onclick="showPage('jadwal-piket')">Jadwal Piket</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="accordion-item">
+                <div class="accordion-header">
+                    <span><i class="fas fa-images"></i> Media</span>
+                    <i class="fas fa-chevron-down accordion-arrow"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul class="sub-menu">
+                        <li onclick="showPage('album-foto')">Album Foto</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="accordion-item">
+                <div class="accordion-header">
+                    <span><i class="fas fa-info-circle"></i> Informasi</span>
+                    <i class="fas fa-chevron-down accordion-arrow"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul class="sub-menu">
+                        <li onclick="showPage('pengumuman')">Pengumuman</li>
+                        <li onclick="showPage('tugas')">Tugas</li>
+                        <li onclick="showPage('kegiatan')">Kegiatan</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="login-page" class="page active">
+            <div class="login-container">
+                <div class="login-form">
+                    <h2>Login ke Portal Kelas 7D</h2>
+                    <div class="form-group">
+                        <label for="username">Nama Lengkap</label>
+                        <input type="text" id="username" placeholder="Masukkan nama lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Masukkan password">
+                    </div>
+                    <button class="btn" id="login-btn">Login</button>
+                    
+                    <div class="guest-login-container">
+                        <button class="btn btn-secondary" id="guest-login-btn">
+                            <i class="fas fa-eye"></i> Masuk Sebagai Pengunjung
+                        </button>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                            Mode pengunjung memungkinkan Anda melihat informasi tanpa login
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="anggota-kelas" class="page">
+            <h2>Anggota Kelas 7D</h2>
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Cari anggota kelas...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <div class="card-grid" id="anggota-container">
+            </div>
+        </section>
+
+        <section id="organisasi-kelas" class="page">
+            <h2>Struktur Organisasi Kelas 7D</h2>
+            <div class="card-grid" id="organisasi-container">
+            </div>
+        </section>
+
+        <section id="jadwal-pelajaran" class="page">
+            <h2>Jadwal Pelajaran Kelas 7D</h2>
+            <div class="schedule-grid" id="jadwal-container">
+            </div>
+        </section>
+
+        <section id="jadwal-piket" class="page">
+            <h2>Jadwal Piket Kelas 7D</h2>
+            <div class="piket-grid" id="piket-container">
+            </div>
+        </section>
+
+        <section id="album-foto" class="page">
+            <h2>Album Foto Kelas 7D</h2>
+            <div class="album-grid" id="album-container">
+            </div>
+        </section>
+
+        <section id="pengumuman" class="page">
+            <h2>Pengumuman Kelas 7D</h2>
+            <div id="pengumuman-container">
+            </div>
+        </section>
+
+        <section id="tugas" class="page">
+            <h2>Tugas Kelas 7D</h2>
+            <div class="tugas-container" id="tugas-container">
+            </div>
+        </section>
+
+        <section id="kegiatan" class="page">
+            <h2>Kegiatan Kelas 7D</h2>
+            <div class="kegiatan-container" id="kegiatan-container">
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="user-modal-overlay">
+        <div class="user-modal">
+            <div class="modal-header">
+                <h2>Informasi Anggota</h2>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="user-info" id="user-info">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="photo-modal" id="photo-modal">
+        <div class="photo-modal-content">
+            <button class="photo-modal-close" id="photo-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="photo-modal-nav">
+                <button id="prev-photo"><i class="fas fa-chevron-left"></i></button>
+                <button id="next-photo"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <img id="modal-photo" src="" alt="">
+            <div class="photo-info" id="photo-info"></div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text"></span>
+    </div>
+
+    <script src="anggota/daftar-anggota.js"></script>
+    <script src="jadwal/pelajaran.js"></script>
+    <script src="jadwal/piket.js"></script>
+    <script src="media/dataMedia.js"></script>
+    <script src="information/pengumuman/pengumuman.js"></script>
+    <script src="information/tugas/tugas.js"></script>
+    <script src="information/kegiatan/kegiatan.js"></script>
+    <script src="assets/script.js"></script>
+</body>
+</html>
