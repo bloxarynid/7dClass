@@ -1,8 +1,29 @@
+# JANGAN upload file backup
+*.backup
+backup-*
+*-backup.*
+
 # JANGAN upload file dengan password
-*backup*
 *password*
 *secret*
+private/
 
 # File sistem
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# File log
+*.log
+
+# Folder IDE
+.vscode/
+.idea/
+
+# File sementara
+*.tmp
+*.temp
+~$*
+
+# Node modules (jika ada)
+node_modules/
