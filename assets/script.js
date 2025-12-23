@@ -1,49 +1,69 @@
+// ============================================
+// SCRIPT.JS - FILE UTAMA KELAS 7D ESPHERO
+// ============================================
+
+// Import dari file lain
+let auth = window.auth;
+let data = window.data;
+let utils = window.utils;
+
+// Global State
 let currentUser = null;
 let isLoggedIn = false;
 let isGuestMode = false;
 let currentAlbum = null;
 let currentPhotoIndex = 0;
 
+// DOM Elements
 let hamburger, sidebar, pages, loginBtn, guestLoginBtn, searchInput;
 let modalOverlay, modalClose, photoModal, photoModalClose;
 let prevPhotoBtn, nextPhotoBtn, notification, notificationText;
 
-const users = [
-    { username: "abiyyu", password: "abiyyu123", fullname: "Abiyyu Nocherino Revantara" },
-    { username: "ahmed", password: "ahmed123", fullname: "Ahmed Fadee Aisyhafiy" },
-    { username: "alifah", password: "alifah123", fullname: "Alifah Adeliza" },
-    { username: "amalia", password: "amalia123", fullname: "Amalia Rezki Azizi" },
-    { username: "argani", password: "argani123", fullname: "Argani Wisnu Wibisana" },
-    { username: "arni", password: "arni123", fullname: "Arni Rahmadhani" },
-    { username: "aryasatya", password: "aryasatya123", fullname: "Aryasatya Byakta" },
-    { username: "azelia", password: "azelia123", fullname: "Azelia Nur Azzahra" },
-    { username: "azzam", password: "azzam123", fullname: "Azzam Amanullah" },
-    { username: "denessia", password: "denessia123", fullname: "Denessia Fahia Mahya" },
-    { username: "dwika", password: "dwika123", fullname: "Dwika Hadi Wijaya" },
-    { username: "erfira", password: "erfira123", fullname: "Erfira Anggraeni" },
-    { username: "farzan", password: "farzan123", fullname: "Farzan Ahza Argani" },
-    { username: "firli", password: "firli123", fullname: "Firli Alisa Rahma" },
-    { username: "ghatfaan", password: "ghatfaan123", fullname: "Ghatfaan Fayaadh Aufaa" },
-    { username: "hartts", password: "hartts123", fullname: "Harist Abdul Hakim" },
-    { username: "joshua", password: "joshua123", fullname: "Joshua Veddyttarro" },
-    { username: "keisha", password: "keisha123", fullname: "Keisha Novelis Nafeeza Zaafarani" },
-    { username: "kirana", password: "kirana123", fullname: "Kirana Kamalia Ayu Wardaniningrum" },
-    { username: "mohammad", password: "mohammad123", fullname: "Mohammad Asadell Akhtar" },
-    { username: "muhammad", password: "muhammad123", fullname: "Muhammad Ardiansyah" },
-    { username: "mutia", password: "mutia123", fullname: "Mutia Almas Fatimatuzzahra" },
-    { username: "nafis", password: "nafis123", fullname: "Nafis Prawiro" },
-    { username: "nara", password: "nara123", fullname: "Nara Ayu Apriliani" },
-    { username: "priska", password: "priska123", fullname: "Priska Oktaviana" },
-    { username: "rajendra", password: "rajendra123", fullname: "Rajendra Veron Alerea" },
-    { username: "reina", password: "reina123", fullname: "Reina Al Yasmin" },
-    { username: "riyan", password: "riyan123", fullname: "Riyan Ade Saputra" },
-    { username: "selena", password: "selena123", fullname: "Selena Zayna Tatum" },
-    { username: "shafin", password: "shafin123", fullname: "Shafin Althaf" },
-    { username: "zabarjad", password: "zabarjad123", fullname: "Zabarjad Nibras Alzain" },
-    { username: "zauhair", password: "zauhair123", fullname: "Zauhair Rakha Adi" }
-];
-
+// ============================================
+// INITIALIZE APP
+// ============================================
 function initializeApp() {
+    console.log("🚀 Memulai Aplikasi Kelas 7D...");
+    
+    // Inisialisasi auth dan data
+    if (typeof window.auth === 'undefined') {
+        console.error("❌ File auth.js tidak ditemukan!");
+        showNotification("Error: Sistem autentikasi tidak dimuat!", true);
+        return;
+    }
+    
+    if (typeof window.data === 'undefined') {
+        console.error("❌ File data.js tidak ditemukan!");
+        showNotification("Error: Data aplikasi tidak dimuat!", true);
+        return;
+    }
+    
+    auth = window.auth;
+    data = window.data;
+    utils = window.utils || {};
+    
+    // Cache DOM Elements
+    cacheElements();
+    
+    // Setup Event Listeners
+    setupEventListeners();
+    
+    // Setup Accordion
+    setupAccordion();
+    
+    // Setup Submenu
+    setupSubMenu();
+    
+    // Load initial data
+    loadInitialData();
+    
+    // Check session
+    checkSavedSession();
+    
+    console.log("✅ Aplikasi siap digunakan!");
+}
+
+function cacheElements() {
     hamburger = document.getElementById('hamburger-btn');
     sidebar = document.querySelector('.sidebar');
     pages = document.querySelectorAll('.page');
@@ -58,22 +78,54 @@ function initializeApp() {
     nextPhotoBtn = document.getElementById('next-photo');
     notification = document.getElementById('notification');
     notificationText = document.getElementById('notification-text');
+}
+
+function setupEventListeners() {
+    // Hamburger Menu
+    if (hamburger) {
+        hamburger.addEventListener('click', toggleSidebar);
+        hamburger.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            toggleSidebar();
+        }, { passive: false });
+    }
     
-    if (hamburger) hamburger.addEventListener('click', toggleSidebar);
-    if (loginBtn) loginBtn.addEventListener('click', login);
-    if (guestLoginBtn) guestLoginBtn.addEventListener('click', enterGuestMode);
+    // Login Buttons
+    if (loginBtn) {
+        loginBtn.addEventListener('click', handleLogin);
+    }
+    
+    if (guestLoginBtn) {
+        guestLoginBtn.addEventListener('click', enterGuestMode);
+    }
+    
+    // Modal Controls
     if (modalClose) modalClose.addEventListener('click', closeModal);
-    if (searchInput) searchInput.addEventListener('input', filterAnggota);
     if (photoModalClose) photoModalClose.addEventListener('click', closePhotoModal);
     if (prevPhotoBtn) prevPhotoBtn.addEventListener('click', showPrevPhoto);
     if (nextPhotoBtn) nextPhotoBtn.addEventListener('click', showNextPhoto);
     
+    // Search with debounce
+    if (searchInput) {
+        const debouncedSearch = debounce(filterAnggota, 300);
+        searchInput.addEventListener('input', debouncedSearch);
+    }
+    
+    // Modal overlay click
     if (modalOverlay) {
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === modalOverlay) closeModal();
         });
     }
     
+    // Keyboard shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
+    
+    // Window resize
+    window.addEventListener('resize', debounce(handleResize, 200));
+}
+
+function setupAccordion() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     accordionHeaders.forEach(header => {
         header.addEventListener('click', function() {
@@ -92,7 +144,9 @@ function initializeApp() {
             accordionContent.classList.toggle('active');
         });
     });
-    
+}
+
+function setupSubMenu() {
     const subMenuLinks = document.querySelectorAll('.sub-menu li');
     subMenuLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -107,21 +161,99 @@ function initializeApp() {
             }
         });
     });
-    
-    if (hamburger) hamburger.style.display = 'none';
-    
-    if (window.anggotaData) renderAnggotaKelas();
-    if (typeof renderOrganisasiKelas === 'function') renderOrganisasiKelas();
-    if (window.jadwalPelajaran && typeof renderJadwalPelajaran === 'function') renderJadwalPelajaran();
-    if (window.jadwalPiket && typeof renderJadwalPiket === 'function') renderJadwalPiket();
-    if (window.albumData && typeof renderPhotoAlbums === 'function') renderPhotoAlbums();
-    if (window.pengumumanData && typeof renderPengumuman === 'function') renderPengumuman();
-    if (window.tugasData && typeof renderTugas === 'function') renderTugas();
-    if (window.kegiatanData && typeof renderKegiatan === 'function') renderKegiatan();
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp);
+// ============================================
+// AUTHENTICATION FUNCTIONS
+// ============================================
+function handleLogin() {
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    
+    if (!usernameInput || !passwordInput) {
+        showNotification('Form login tidak ditemukan!', true);
+        return;
+    }
+    
+    const result = auth.login(usernameInput, passwordInput);
+    
+    if (result.success) {
+        currentUser = result.user;
+        isLoggedIn = true;
+        isGuestMode = false;
+        
+        passwordInput.value = '';
+        showPage('anggota-kelas');
+        showNotification(result.message);
+        
+        // Save session
+        saveSession();
+        
+        // Update UI
+        updateUserUI();
+        
+        // Load anggota data
+        if (data && data.anggotaData) {
+            renderAnggotaKelas(data.anggotaData);
+        }
+    } else {
+        showNotification(result.message, true);
+        passwordInput.value = '';
+        passwordInput.focus();
+    }
+}
 
+function enterGuestMode() {
+    isGuestMode = true;
+    isLoggedIn = false;
+    currentUser = null;
+    
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    if (usernameInput) usernameInput.value = '';
+    if (passwordInput) passwordInput.value = '';
+    
+    showPage('anggota-kelas');
+    showNotification("Anda masuk sebagai pengunjung. Fitur terbatas.");
+    
+    if (data && data.anggotaData) {
+        renderAnggotaKelas(data.anggotaData);
+    }
+}
+
+function updateUserUI() {
+    const userNameDisplay = document.getElementById('user-name-display');
+    const userAvatar = document.getElementById('user-avatar');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    if (currentUser) {
+        if (userNameDisplay) {
+            userNameDisplay.textContent = currentUser.fullname;
+            userNameDisplay.style.display = 'inline';
+        }
+        
+        if (userAvatar) {
+            userAvatar.src = `anggota/icon/absen${getAbsenFromName(currentUser.fullname)}.jpg`;
+            userAvatar.style.display = 'block';
+        }
+        
+        if (logoutBtn) logoutBtn.style.display = 'block';
+    } else {
+        if (userNameDisplay) userNameDisplay.style.display = 'none';
+        if (userAvatar) userAvatar.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+    }
+}
+
+function getAbsenFromName(fullname) {
+    if (!data || !data.anggotaData) return 'default';
+    const anggota = data.anggotaData.find(a => a.nama === fullname);
+    return anggota ? anggota.absen : 'default';
+}
+
+// ============================================
+// UI FUNCTIONS
+// ============================================
 function toggleSidebar() {
     if (!hamburger || !sidebar) return;
     
@@ -158,59 +290,6 @@ function showPage(pageId) {
     }
 }
 
-function login() {
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    
-    if (!usernameInput || !passwordInput) {
-        showNotification('Form login tidak ditemukan!', true);
-        return;
-    }
-    
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
-    
-    if (!username || !password) {
-        showNotification('Username dan password harus diisi!', true);
-        return;
-    }
-    
-    const user = users.find(u => 
-        (u.username.toLowerCase() === username.toLowerCase() || 
-         u.fullname.toLowerCase() === username.toLowerCase()) && 
-        u.password === password
-    );
-    
-    if (user) {
-        currentUser = user;
-        isLoggedIn = true;
-        isGuestMode = false;
-        passwordInput.value = '';
-        showPage('anggota-kelas');
-        showNotification(`Selamat datang, ${user.fullname}!`);
-        if (window.anggotaData) renderAnggotaKelas();
-    } else {
-        showNotification('Username atau password salah!', true);
-        passwordInput.value = '';
-        passwordInput.focus();
-    }
-}
-
-function enterGuestMode() {
-    isGuestMode = true;
-    isLoggedIn = false;
-    currentUser = null;
-    
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    if (usernameInput) usernameInput.value = '';
-    if (passwordInput) passwordInput.value = '';
-    
-    showPage('anggota-kelas');
-    showNotification("Anda masuk sebagai pengunjung. Fitur terbatas.");
-    if (window.anggotaData) renderAnggotaKelas();
-}
-
 function showNotification(message, isError = false) {
     if (!notification || !notificationText) return;
     
@@ -226,76 +305,60 @@ function showNotification(message, isError = false) {
     }, 3000);
 }
 
-function openUserModal(absen) {
-    if (!modalOverlay) return;
-    
-    const anggota = window.anggotaData ? window.anggotaData.find(a => a.absen === absen) : null;
-    if (!anggota) {
-        showNotification('Data anggota tidak ditemukan!', true);
-        return;
+// ============================================
+// DATA FUNCTIONS
+// ============================================
+function loadInitialData() {
+    // Load anggota
+    if (data && data.anggotaData) {
+        renderAnggotaKelas(data.anggotaData);
     }
     
-    const userInfo = document.getElementById('user-info');
-    if (!userInfo) return;
+    // Load organisasi
+    if (typeof renderOrganisasiKelas === 'function') {
+        renderOrganisasiKelas();
+    }
     
-    userInfo.innerHTML = `
-        <div class="user-photo">
-            <img src="anggota/icon/absen${absen}.jpg" alt="${anggota.nama}" 
-                 onerror="this.onerror=null; this.src='anggota/icon/default.jpg';">
-        </div>
-        <div class="user-details">
-            <h2>${anggota.nama}</h2>
-            <p><span class="detail-label">Absen:</span> ${anggota.absen}</p>
-            <p><span class="detail-label">Kedudukan:</span> ${anggota.kedudukan}</p>
-            <p><span class="detail-label">Kelas:</span> 7D - Esphero</p>
-            <p><span class="detail-label">Sekolah:</span> SMPN 2 Banjarnegara</p>
-        </div>
-    `;
+    // Load jadwal
+    if (data && data.jadwalPelajaran && typeof renderJadwalPelajaran === 'function') {
+        renderJadwalPelajaran();
+    }
     
-    modalOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    if (modalOverlay) {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+    if (data && data.jadwalPiket && typeof renderJadwalPiket === 'function') {
+        renderJadwalPiket();
+    }
+    
+    // Load media
+    if (data && data.albumData && typeof renderPhotoAlbums === 'function') {
+        renderPhotoAlbums();
+    }
+    
+    // Load informasi
+    if (data && data.pengumumanData && typeof renderPengumuman === 'function') {
+        renderPengumuman();
+    }
+    
+    if (data && data.tugasData && typeof renderTugas === 'function') {
+        renderTugas();
+    }
+    
+    if (data && data.kegiatanData && typeof renderKegiatan === 'function') {
+        renderKegiatan();
     }
 }
 
-function filterAnggota() {
-    if (!searchInput || !window.anggotaData) return;
-    
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    
-    if (!searchTerm) {
-        renderAnggotaKelas(window.anggotaData);
-        return;
-    }
-    
-    const filteredAnggota = window.anggotaData.filter(anggota => {
-        return (
-            anggota.nama.toLowerCase().includes(searchTerm) ||
-            anggota.absen.toString().includes(searchTerm) ||
-            (anggota.kedudukan && anggota.kedudukan.toLowerCase().includes(searchTerm))
-        );
-    });
-    
-    renderAnggotaKelas(filteredAnggota);
-}
-
-function renderAnggotaKelas(data = window.anggotaData) {
+function renderAnggotaKelas(dataArray = data.anggotaData) {
     const cardGrid = document.getElementById('anggota-container');
-    if (!cardGrid) return;
+    if (!cardGrid || !dataArray) return;
     
     cardGrid.innerHTML = '';
     
-    if (!data || !Array.isArray(data) || data.length === 0) {
+    if (!Array.isArray(dataArray) || dataArray.length === 0) {
         cardGrid.innerHTML = '<p class="no-result">Tidak ada anggota yang ditemukan</p>';
         return;
     }
     
-    data.forEach((anggota, index) => {
+    dataArray.forEach((anggota, index) => {
         const card = document.createElement('div');
         card.className = 'card animate-card';
         card.style.animationDelay = `${index * 0.05}s`;
@@ -325,6 +388,60 @@ function renderAnggotaKelas(data = window.anggotaData) {
     });
 }
 
+function filterAnggota() {
+    if (!searchInput || !data || !data.anggotaData) return;
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    
+    if (!searchTerm) {
+        renderAnggotaKelas(data.anggotaData);
+        return;
+    }
+    
+    const filteredAnggota = data.anggotaData.filter(anggota => {
+        return (
+            anggota.nama.toLowerCase().includes(searchTerm) ||
+            anggota.absen.toString().includes(searchTerm) ||
+            (anggota.kedudukan && anggota.kedudukan.toLowerCase().includes(searchTerm))
+        );
+    });
+    
+    renderAnggotaKelas(filteredAnggota);
+}
+
+function openUserModal(absen) {
+    if (!modalOverlay || !data || !data.anggotaData) return;
+    
+    const anggota = data.anggotaData.find(a => a.absen === absen);
+    if (!anggota) {
+        showNotification('Data anggota tidak ditemukan!', true);
+        return;
+    }
+    
+    const userInfo = document.getElementById('user-info');
+    if (!userInfo) return;
+    
+    userInfo.innerHTML = `
+        <div class="user-photo">
+            <img src="anggota/icon/absen${absen}.jpg" alt="${anggota.nama}" 
+                 onerror="this.onerror=null; this.src='anggota/icon/default.jpg';">
+        </div>
+        <div class="user-details">
+            <h2>${anggota.nama}</h2>
+            <p><span class="detail-label">Absen:</span> ${anggota.absen}</p>
+            <p><span class="detail-label">Kedudukan:</span> ${anggota.kedudukan}</p>
+            <p><span class="detail-label">Kelas:</span> 7D - Esphero</p>
+            <p><span class="detail-label">Sekolah:</span> SMPN 2 Banjarnegara</p>
+        </div>
+    `;
+    
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// ============================================
+// PHOTO MODAL FUNCTIONS
+// ============================================
 function openPhoto(album, index) {
     if (!photoModal || !album || !album.photos || album.photos.length === 0) return;
     
@@ -369,7 +486,22 @@ function showNextPhoto() {
     openPhoto(currentAlbum, currentPhotoIndex);
 }
 
-document.addEventListener('keydown', function(e) {
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function handleKeyboardShortcuts(e) {
     if (photoModal && photoModal.classList.contains('active')) {
         if (e.key === 'Escape') {
             closePhotoModal();
@@ -383,17 +515,90 @@ document.addEventListener('keydown', function(e) {
     if (modalOverlay && modalOverlay.classList.contains('active')) {
         if (e.key === 'Escape') closeModal();
     }
-});
+    
+    // Ctrl/Cmd + K untuk fokus search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        if (searchInput) searchInput.focus();
+    }
+}
 
-window.addEventListener('resize', function() {
+function handleResize() {
     if (window.innerWidth >= 768 && sidebar && sidebar.classList.contains('active')) {
         sidebar.classList.remove('active');
         if (hamburger) hamburger.classList.remove('active');
     }
+}
+
+function saveSession() {
+    if (!currentUser) return;
+    
+    const sessionData = {
+        user: currentUser,
+        timestamp: Date.now()
+    };
+    
+    try {
+        localStorage.setItem('kelas7d_session', JSON.stringify(sessionData));
+    } catch (e) {
+        console.error('Gagal menyimpan session:', e);
+    }
+}
+
+function checkSavedSession() {
+    try {
+        const sessionData = localStorage.getItem('kelas7d_session');
+        if (sessionData) {
+            const session = JSON.parse(sessionData);
+            const now = Date.now();
+            const oneDay = 24 * 60 * 60 * 1000; // 24 jam
+            
+            if (now - session.timestamp < oneDay) {
+                currentUser = session.user;
+                isLoggedIn = true;
+                isGuestMode = false;
+                
+                showPage('anggota-kelas');
+                updateUserUI();
+                showNotification(`Selamat datang kembali, ${currentUser.fullname}!`);
+            } else {
+                localStorage.removeItem('kelas7d_session');
+            }
+        }
+    } catch (e) {
+        console.error('Error checking session:', e);
+    }
+}
+
+function closeModal() {
+    if (modalOverlay) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// ============================================
+// START APPLICATION
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    // Load file auth.js dan data.js terlebih dahulu
+    loadScript('assets/auth.js', function() {
+        loadScript('assets/data.js', function() {
+            // Utils optional
+            loadScript('assets/utils.js', function() {
+                initializeApp();
+            });
+        });
+    });
 });
 
-if (searchInput) {
-    searchInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') e.preventDefault();
-    });
+function loadScript(src, callback) {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = callback;
+    script.onerror = function() {
+        console.error(`❌ Gagal memuat file: ${src}`);
+        callback();
+    };
+    document.head.appendChild(script);
 }
