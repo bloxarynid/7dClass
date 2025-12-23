@@ -1,0 +1,44 @@
+# FILE .gitignore
+# File ini akan mencegah file rahasia masuk ke GitHub
+
+# JANGAN upload folder private data
+private-data/
+secret/
+*.secret
+passwords.*
+.env
+config-private.*
+
+# JANGAN upload file backup
+*.backup
+backup-*
+
+# File sistem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# File log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Folder dependencies (jika pakai)
+node_modules/
+jspm_packages/
+
+# File IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# File sementara
+*.tmp
+*.temp
+~$*
+
+# File upload (jika ada)
+uploads/
+temp/
