@@ -1,3 +1,13 @@
+Terdapat beberapa kesalahan dalam data pengumuman tersebut:
+
+1. Format list ranking tidak konsisten (campuran <p> dan <li>)
+2. Ranking 8 seharusnya tidak ada (langsung dari 7 ke 9)
+3. Ada duplikasi nama Farzan Ahza Argani di ranking 7 dan 24
+4. Azelia Nur Azzahra muncul dua kali (ranking 9 dan 26)
+
+Berikut kode yang sudah diperbaiki sesuai format:
+
+```javascript
 // Data Pengumuman
 window.pengumumanData = [
     { 
@@ -5,6 +15,40 @@ window.pengumumanData = [
         content: "Website ini adalah portal resmi untuk komunikasi dan informasi kelas. Semoga bermanfaat!", 
         date: "2023-05-01", 
         author: "Administrator" 
+    },
+    {
+        title: "Daftar Ranking Kelas 7D Semester Satu",
+        content: `<p><strong>Ranking Kelas 7D ✨</strong></p>
+                 <ol style="margin-left: 20px; line-height: 1.6;">
+                     <li><strong>Dwika Hadi Wijaya</strong></li>
+                     <li><strong>Denessia Fahia Mahya</strong></li>
+                     <li><strong>Arni Rahmadhani</strong></li>
+                     <li><strong>Erfira Anggraeni</strong></li>
+                     <li><strong>Zauhair Rakha Adi</strong></li>
+                     <li><strong>Shafin Althaf</strong></li>
+                     <li><strong>Farzan Ahza Argani</strong> & <strong>Azzam Amanullah</strong> (Ranking 7)</li>
+                     <li><strong>Rajendra Veron Alerea</strong> & <strong>Azelia Nur Azzahra</strong> (Ranking 9)</li>
+                     <li><strong>Mutia Almas Fatimatuzzahra</strong></li>
+                     <li><strong>Reina Al Yasmin</strong></li>
+                     <li><strong>Nafis Prawiro</strong> & <strong>Alifah Adeliza</strong> (Ranking 13)</li>
+                     <li><strong>Mohammad Asadell Akhtar</strong></li>
+                     <li><strong>Kirana Kamalia Ayu Wardaniningrum</strong></li>
+                     <li><strong>Firli Alisa Rahma</strong></li>
+                     <li><strong>Keisha Novelis Nafeeza Zaafarani</strong></li>
+                     <li><strong>Amalia Rezki Azizi</strong></li>
+                     <li><strong>Muhammad Ardiansyah</strong>, <strong>Aryasatya Byakta</strong>, & <strong>Priska Oktaviana</strong> (Ranking 20)</li>
+                     <li><strong>Nara Ayu Apriliani</strong></li>
+                     <li><strong>Selena Zayna Tatum</strong></li>
+                     <li><strong>Harist Abdul Hakim</strong></li>
+                     <li><strong>Joshua Veddyttarro</strong></li>
+                     <li><strong>Riyan Ade Saputra</strong></li>
+                     <li><strong>Abiyyu Nocherino Revantara</strong></li>
+                     <li><strong>Ahmed Fadee Aisyhafiy</strong></li>
+                     <li><strong>Ghatfaan Fayaadh Aufaa</strong></li>
+                 </ol>
+                 <p><em>Catatan: Ranking berdasarkan nilai kumulatif semester satu.</em></p>`,
+        date: "5/1/2026",
+        author: "Erfira Anggraeni & Dwika Hadi"
     },
     {
         title: "MBG - Jadwal Piket & Petunjuk",
