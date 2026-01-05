@@ -1,13 +1,3 @@
-Terdapat beberapa kesalahan dalam data pengumuman tersebut:
-
-1. Format list ranking tidak konsisten (campuran <p> dan <li>)
-2. Ranking 8 seharusnya tidak ada (langsung dari 7 ke 9)
-3. Ada duplikasi nama Farzan Ahza Argani di ranking 7 dan 24
-4. Azelia Nur Azzahra muncul dua kali (ranking 9 dan 26)
-
-Berikut kode yang sudah diperbaiki sesuai format:
-
-```javascript
 // Data Pengumuman
 window.pengumumanData = [
     { 
