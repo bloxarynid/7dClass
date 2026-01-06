@@ -15,6 +15,13 @@ window.tugasData = [
         status: "Belum Dikerjakan"
     },
     {
+        title: "Tugas Matematika",
+        date: "7 Januari 2026",
+        mapel: "Matematika",
+        content: '<p>Informasi bagi besok, tepatnya di hari <strong>Rabu 7 Januari tahun 2026</strong>. Semua siswa/i <strong>harus membaca buku matematika halaman 124 dan halaman selanjutnya!</strong>',
+        status: "Sedang dalam Pengerjaan"
+    },
+    {
         title: "Tugas IPA",
         date: "20 Oktober 2025",
         mapel: "IPA",
