@@ -73,7 +73,9 @@ function initializeApp() {
     if (prevPhotoBtn) prevPhotoBtn.addEventListener('click', showPrevPhoto);
     if (nextPhotoBtn) nextPhotoBtn.addEventListener('click', showNextPhoto);
     if (themeToggle) themeToggle.addEventListener('click', toggleDarkMode);
-    
+    if (document.getElementById('hubungi-admin-container')) {
+        renderHubungiAdmin();
+    }
     if (modalOverlay) {
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === modalOverlay) closeModal();
