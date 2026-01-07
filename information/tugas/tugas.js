@@ -12,14 +12,14 @@ window.tugasData = [
                          Klik gambar untuk melihat lebih jelas
                      </p>
                   </div>`,
-        status: "Belum Dikerjakan"
+        status: "Selesai"
     },
     {
         title: "Tugas Matematika",
         date: "7 Januari 2026",
         mapel: "Matematika",
         content: '<p>Informasi bagi besok, tepatnya di hari <strong>Rabu 7 Januari tahun 2026</strong>. Semua siswa/i <strong>harus membaca buku matematika halaman 124 dan halaman selanjutnya!</strong>',
-        status: "Sedang dalam Pengerjaan"
+        status: "Selesai"
     },
     {
         title: "Tugas IPA",
@@ -29,23 +29,23 @@ window.tugasData = [
                  <p>2. Jelaskan mengapa raksa dan alkohol di gunakan dalam pembuatan termometer!</p>
                  <p>3. Sebutkan dua titik tetap yabg di gunakan dalam pembuatan termometer!</p>
                  <p>4. titik tetap (Bawah/Atas), nama Termometer (pengukuran), Celcius titik tetap bawah dan atas, Reamur titik tetap bawah atas, Fahrenheit titik tetap bawah atas, kelvin titik tetap bawah dan atas</p>`,
-        status: "Belum Dikerjakan"
+        status: "Selesai"
     },
     {
         title: "Tugas Matematika",
-        date: "Sabtu, 1 November 2024",
+        date: "Sabtu, 1 November 2025",
         mapel: "Matematika",
         content: `<p><strong>Buku:</strong> Halaman 80</p>
                  <p><strong>Soal:</strong> Nomor 4, 5, dan 6</p>
                  <p><strong>Deskripsi:</strong> Kerjakan soal-soal tersebut dengan menuliskan langkah-langkah pengerjaannya dengan jelas.</p>`,
-        status: "Belum Dikerjakan"
+        status: "Selesai"
     },
     {
         title: "Tugas Bahasa Indonesia",
         date: "20 Oktober 2025",
         mapel: "Bahasa Indonesia",
         content: `<p>Buatlah cerita fantasi!.</p>`,
-        status: "Terlambat"
+        status: "Selesai"
     }
 ];
 
