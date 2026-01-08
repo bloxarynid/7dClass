@@ -1,6 +1,20 @@
 // Data Tugas
 window.tugasData = [
     {
+        title: "Bahasa Indonesia",
+        date: "9 Januari 2026",
+        mapel: "Bahasa Indonesia",
+        content: `<div style="text-align: center; margin: 15px 0;">
+                     <img src="information/tugas/image/tugas2.jpg" alt="Tugas Bahasa Indonesia" 
+                          style="max-width: 100%; height: auto; border-radius: 8px; cursor: pointer;"
+                          onclick="openImageModal('information/tugas/image/tugas2.jpg', 'Tugas Bahasa Indonesia')">
+                     <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                         Klik gambar untuk melihat lebih jelas
+                     </p>
+                  </div>`,
+        status: "Belum Selesai"
+    },
+    {
         title: "PR PPKN",
         date: "25 Oktober 2025",
         mapel: "PPKN",
