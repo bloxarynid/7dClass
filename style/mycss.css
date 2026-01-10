@@ -10,7 +10,7 @@
     --warna-keberhasilan: #4caf50;
     --warna-peringatan: #ff9800;
     --warna-bahaya: #f44336;
-    --inpit-gelap: #3a3a3a;
+    --input-gelap: #3a3a3a;
 }
 
 * {
@@ -274,7 +274,7 @@ header {
 }
 
 .login-form {
-    background-color: var(--warna-kartu);
+    background: transparent;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -1005,6 +1005,12 @@ body.login-page .theme-toggle {
     color: #b0b0b0;
 }
 
+.dark-mode .title-jadwal-ips,
+.dark-mode .deskripsi-walas,
+.dark-mode .nama-walas {
+  color: #e0e0e0;
+}
+
 .dark-mode .search-input,
 .dark-mode .form-group input,
 .dark-mode .form-group textarea {
@@ -1122,7 +1128,7 @@ body.login-page .theme-toggle {
         padding: 15px;
     }
     
-    .schedule-grid, .piket-grid {
+    .schedule-grid, .jadwal-ips-7, .piket-grid {
         grid-template-columns: 1fr;
     }
     
@@ -1384,6 +1390,355 @@ body.login-page .footer-copyright {
     }
 }
 
+.wali-kelas {
+  padding: 5px;
+  color: var(--warna-huruf);
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  margin: 5px;
+}
+
+.gambar-walas {
+  height: 250px;
+  width: 250px;
+  border-radius: 15px;
+  object-fit: cover;
+  position: relative;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 14px;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gambar-walas:hover  {
+  transform: scale(1.05);
+}
+
+.bingkai-profil {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid var(--warna-utama);
+  inset 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  background: linear-gradient(135deg, #f7aaaa 0%, #fee0e0 100%);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.deskripsi-walas {
+  color: var(--huruf-gelap);
+  text-align: center;
+}
+
+.nama-walas {
+  color: var(--warna-huruf);
+}
+
+.title-jadwal-ips {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.jadwal-ips-7 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gambar-tengah {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  width: 362px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.point-esphero {
+  text-align: start;
+  margin-top: 15px;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+}
+
+.deskripsi-baris {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.sumber {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.esphero-loc {
+    width: 362px;
+    height: 362px;
+    border-radius: 15px;
+    display: block;
+}
+
+/* STYLE KHUSUS JADWAL IPS */
+.schedule-class-badge {
+    display: inline-block;
+    background: var(--warna-muda);
+    color: var(--warna-utama);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.schedule-guru {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.no-schedule {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-style: italic;
+}
+
+.no-schedule i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+    color: #ccc;
+}
+
+/* Efek khusus untuk jadwal IPS */
+.schedule-day.ips-day {
+    border-left: 4px solid var(--warna-utama);
+}
+
+.schedule-item.ips-item {
+    background: rgba(125, 12, 12, 0.05);
+    margin: 5px 0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.schedule-item.ips-item .schedule-subject {
+    color: var(--warna-utama);
+    font-weight: 500;
+}
+
+/* Dark mode untuk jadwal IPS */
+.dark-mode .schedule-class-badge {
+    background: #3a3a3a;
+    color: var(--warna-kedua);
+}
+
+.dark-mode .schedule-guru {
+    color: #b0b0b0;
+}
+
+.dark-mode .no-schedule {
+    color: #999;
+}
+
+.dark-mode .schedule-item.ips-item {
+    background: rgba(125, 12, 12, 0.1);
+}
+
+/* Animasi untuk jadwal IPS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.schedule-day {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.schedule-item {
+    animation: fadeInUp 0.3s ease forwards;
+    opacity: 0;
+}
+
+/* STYLE UNTUK HUBUNGI ADMIN */
+.admin-contact-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid var(--warna-muda);
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--warna-muda);
+}
+
+.admin-header i {
+    font-size: 2.5rem;
+    color: var(--warna-utama);
+}
+
+.admin-header h3 {
+    color: var(--warna-utama);
+    font-weight: 600;
+    margin: 0;
+}
+
+.admin-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--warna-huruf);
+}
+
+.admin-info i {
+    width: 20px;
+    text-align: center;
+    color: var(--warna-utama);
+}
+
+.admin-contact-methods {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid var(--warna-muda);
+}
+
+.admin-contact-methods h4 {
+    color: var(--warna-utama);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contact-btn {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--warna-utama) 0%, #5a0a0a 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(125, 12, 12, 0.3);
+}
+
+.contact-btn:nth-child(2) {
+    background: linear-gradient(135deg, #4285f4 0%, #2c5fc9 100%);
+}
+
+.contact-btn:nth-child(3) {
+    background: linear-gradient(135deg, #e4405f 0%, #c13584 100%);
+}
+
+.admin-note {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--warna-peringatan);
+}
+
+.admin-note p {
+    margin: 0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-note i {
+    color: var(--warna-peringatan);
+}
+
+/* Dark mode untuk hubungi admin */
+.dark-mode .admin-contact-card {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.dark-mode .admin-header h3 {
+    color: var(--warna-kedua);
+}
+
+.dark-mode .admin-header i {
+    color: var(--warna-kedua);
+}
+
+.dark-mode .admin-info p {
+    color: #e0e0e0;
+}
+
+.dark-mode .admin-contact-methods h4 {
+    color: var(--warna-kedua);
+}
+
+.dark-mode .admin-note {
+    background: #3a3a3a;
+    border-left-color: var(--warna-peringatan);
+}
+
+.dark-mode .admin-note p {
+    color: #b0b0b0;
+}
+
+/* Responsive untuk hubungi admin */
+@media (max-width: 768px) {
+    .admin-contact-card {
+        padding: 20px;
+        margin: 0 10px;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+    }
+    
+    .contact-btn {
+        width: 100%;
+    }
+}
 
 /* Dari baris tepat di bawah ini adalah "UI Bug Fixes" gwehh */
 section.page h2 {
@@ -1394,6 +1749,7 @@ section.page h2 {
 .search-container,
 .card-grid,
 .schedule-grid,
+.jadwal-ips-7,
 .piket-grid,
 .album-grid,
 .tugas-container,
