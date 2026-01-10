@@ -1,5 +1,14 @@
 // Data Pengumuman
 window.pengumumanData = [
+    {
+        title: "Surat Untuk Wali Murid",
+        content: '<div style="text-align: center;">"<small>surat resmi untuk wali murud.</small>"</div>',
+        date: "12 Januari 2026",
+        author: "Dwika Hadi Wijaya",
+        images: [
+            { src: "information/pengumuman/image/pengumuman4.jpg", alt: "wali murid" }
+        ]
+    },
     { 
         title: "Selamat Datang di Website Kelas 7D", 
         content: "Website ini adalah portal resmi untuk komunikasi dan informasi kelas. Semoga bermanfaat!", 
@@ -328,7 +337,7 @@ function generateRankingContent() {
     return html;
 }
 
-// Fungsi Render Pengumuman
+// Fungsi Render Pengumuman - FIX BUG SAJA
 function renderPengumuman() {
     const container = document.getElementById('pengumuman-container');
     if (!container) return;
@@ -344,9 +353,9 @@ function renderPengumuman() {
         const announcementEl = document.createElement('div');
         announcementEl.className = 'announcement';
         
-        // Jika ini adalah pengumuman ranking, generate konten khusus
+        // FIX: Ganti index 1 menjadi index 2 (ranking ada di index 2)
         let content = announcement.content;
-        if (index === 1) { // Pengumuman ranking adalah yang kedua dalam array
+        if (index === 2) { // INI PERBAIKAN UTAMA: index 2 bukan 1
             content = generateRankingContent();
         }
         
@@ -380,7 +389,7 @@ function renderPengumuman() {
     });
 }
 
-// Fungsi Buka Gambar Modal
+// Fungsi Buka Gambar Modal - FIX BUG ESCAPE
 function openImageModal(src, title) {
     const modal = document.createElement('div');
     modal.className = 'modal-overlay active';
@@ -396,7 +405,7 @@ function openImageModal(src, title) {
             <div class="modal-body" style="text-align: center; overflow: auto;">
                 <img src="${src}" alt="${title}" 
                      style="max-width: 100%; max-height: 70vh; border-radius: 8px;"
-                     onerror="this.src='media/image/default.jpg'">
+                     onerror="this.onerror=null; this.src='media/image/default.jpg'">
             </div>
         </div>
     `;
@@ -413,6 +422,7 @@ function openImageModal(src, title) {
         }
     });
     
+    // FIX: Tambahkan cleanup event listener
     const closeOnEsc = (e) => {
         if (e.key === 'Escape') {
             document.body.removeChild(modal);
@@ -420,6 +430,14 @@ function openImageModal(src, title) {
         }
     };
     document.addEventListener('keydown', closeOnEsc);
+    
+    // FIX: Hapus event listener saat modal ditutup
+    const originalClose = modal.querySelector('#image-modal-close').onclick;
+    modal.querySelector('#image-modal-close').onclick = function() {
+        document.removeEventListener('keydown', closeOnEsc);
+        if (originalClose) originalClose();
+        document.body.removeChild(modal);
+    };
 }
 
 // Inisialisasi saat halaman dimuat
