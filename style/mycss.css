@@ -1438,6 +1438,7 @@ body.login-page .footer-copyright {
 
 .nama-walas {
   color: var(--warna-huruf);
+  margin-top: 8px;
 }
 
 .title-jadwal-ips {
@@ -1450,15 +1451,36 @@ body.login-page .footer-copyright {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
-
-.gambar-tengah {
-  display: block;
+.container-gambar {
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 6px;
-  width: 362px;
+  width: 100%;
+}
+
+.gambar-tengah {
+  max-width: 100%;
   height: auto;
+  border-radius: 6px;
   margin-bottom: 15px;
+  object-fit: cover; /* Optional: agar gambar tidak terdistorsi */
+  transition: transform 0.5s ease;
+}
+
+.gambar-tengah:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .gambar-tengah {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .gambar-tengah {
+    width: 100%;
+  }
 }
 
 .point-esphero {
@@ -1476,14 +1498,17 @@ body.login-page .footer-copyright {
 .sumber {
   margin-top: 15px;
   margin-bottom: 25px;
-  text-align: center;
+  text-align: end;
 }
 
 .esphero-loc {
-    width: 362px;
-    height: 362px;
+    width: 100%; /* Ini kunci utama! */
+    height: 400px; /* Default height */
     border-radius: 15px;
     display: block;
+    border: 0;
+    margin: 0 auto;
+    max-width: 800px; /* Batas maksimal lebar */
 }
 
 /* STYLE KHUSUS JADWAL IPS */
