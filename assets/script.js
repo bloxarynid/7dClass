@@ -73,15 +73,20 @@ function initializeApp() {
     if (prevPhotoBtn) prevPhotoBtn.addEventListener('click', showPrevPhoto);
     if (nextPhotoBtn) nextPhotoBtn.addEventListener('click', showNextPhoto);
     if (themeToggle) themeToggle.addEventListener('click', toggleDarkMode);
+    
+    // Render halaman hubungi admin
     if (document.getElementById('hubungi-admin-container')) {
         renderHubungiAdmin();
     }
+    
+    // Modal overlay click to close
     if (modalOverlay) {
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === modalOverlay) closeModal();
         });
     }
     
+    // Accordion menu setup
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     accordionHeaders.forEach(header => {
         header.addEventListener('click', function() {
@@ -101,6 +106,7 @@ function initializeApp() {
         });
     });
     
+    // Sub-menu links setup
     const subMenuLinks = document.querySelectorAll('.sub-menu li');
     subMenuLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -116,21 +122,177 @@ function initializeApp() {
         });
     });
     
+    // Sembunyikan hamburger dan theme toggle di login page
     if (hamburger) hamburger.style.display = 'none';
     if (themeToggle) themeToggle.style.display = 'none';
     
+    // Load preferences
     loadDarkModePreference();
     checkAutoLogin();
     
+    // Render semua konten yang tersedia
     if (window.anggotaData) renderAnggotaKelas();
     if (typeof renderOrganisasiKelas === 'function') renderOrganisasiKelas();
     if (window.jadwalPelajaran && typeof renderJadwalPelajaran === 'function') renderJadwalPelajaran();
+    if (window.jadwalPelajaranIps && typeof renderJadwalPelajaranIps === 'function') {
+        // Jika halaman profil wali kelas aktif, render jadwal IPS
+        if (document.getElementById('profil-walas').classList.contains('active')) {
+            setTimeout(() => renderJadwalPelajaranIps(), 300);
+        }
+    }
     if (window.jadwalPiket && typeof renderJadwalPiket === 'function') renderJadwalPiket();
     if (window.albumData && typeof renderPhotoAlbums === 'function') renderPhotoAlbums();
     if (window.pengumumanData && typeof renderPengumuman === 'function') renderPengumuman();
     if (window.tugasData && typeof renderTugas === 'function') renderTugas();
     if (window.kegiatanData && typeof renderKegiatan === 'function') renderKegiatan();
+    
+    // Setup keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (photoModal && photoModal.classList.contains('active')) {
+            if (e.key === 'Escape') {
+                closePhotoModal();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevPhoto();
+            } else if (e.key === 'ArrowRight') {
+                showNextPhoto();
+            }
+        }
+        
+        if (modalOverlay && modalOverlay.classList.contains('active')) {
+            if (e.key === 'Escape') closeModal();
+        }
+        
+        const passwordInput = document.getElementById('password');
+        if (passwordInput && e.key === 'Enter' && document.activeElement === passwordInput) {
+            handleLogin();
+        }
+        
+        if (e.key === 'd' && e.ctrlKey) {
+            e.preventDefault();
+            toggleDarkMode();
+        }
+    });
+    
+    // Responsive behavior
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && sidebar && sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+            if (hamburger) hamburger.classList.remove('active');
+        }
+    });
+    
+    if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') e.preventDefault();
+        });
+    }
+    
+    // Dark mode preference change
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const savedDarkMode = localStorage.getItem('class7d_darkmode');
+        if (savedDarkMode === null) {
+            if (e.matches) {
+                isDarkMode = true;
+                document.body.classList.add('dark-mode');
+                if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                isDarkMode = false;
+                document.body.classList.remove('dark-mode');
+                if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+    });
 }
+
+// Fungsi renderHubungiAdmin
+function renderHubungiAdmin() {
+    const container = document.getElementById('hubungi-admin-container');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="admin-contact-card">
+            <div class="admin-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>Admin Kelas 7D</h3>
+            </div>
+            <div class="admin-info">
+                <p><i class="fas fa-user"></i> <strong>Nama:</strong> Dwika Hadi Wijaya</p>
+                <p><i class="fas fa-id-badge"></i> <strong>Absen:</strong> 11</p>
+                <p><i class="fas fa-graduation-cap"></i> <strong>Kedudukan:</strong> Ketua Kelas</p>
+            </div>
+            <div class="admin-contact-methods">
+                <h4><i class="fas fa-comment-dots"></i> Hubungi Melalui:</h4>
+                <div class="contact-buttons">
+                    <button class="btn contact-btn" onclick="contactAdmin('whatsapp')">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="btn contact-btn" onclick="contactAdmin('email')">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button class="btn contact-btn" onclick="contactAdmin('instagram')">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                </div>
+            </div>
+            <div class="admin-note">
+                <p><i class="fas fa-info-circle"></i> Catatan: Admin akan merespons dalam 1x24 jam pada hari sekolah.</p>
+            </div>
+        </div>
+    `;
+}
+
+function contactAdmin(method) {
+    let message = '';
+    switch(method) {
+        case 'whatsapp':
+            message = 'Fitur WhatsApp akan segera tersedia!';
+            break;
+        case 'email':
+            message = 'Email: dwika.7d@smpn2banjarnegara.sch.id';
+            break;
+        case 'instagram':
+            message = 'Instagram: @bloxaryn.dwika';
+            break;
+        default:
+            message = 'Metode kontak tidak tersedia';
+    }
+    showNotification(message);
+}
+
+// Perbaikan showPage untuk auto-render jadwal IPS
+function showPage(pageId) {
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) targetPage.classList.add('active');
+    
+    if (hamburger) {
+        if (pageId === 'login-page') {
+            hamburger.style.display = 'none';
+            if (themeToggle) themeToggle.style.display = 'none';
+        } else {
+            hamburger.style.display = 'flex';
+            if (themeToggle) themeToggle.style.display = 'flex';
+        }
+    }
+    
+    // Auto render jadwal IPS ketika halaman profil wali kelas dibuka
+    if (pageId === 'profil-walas') {
+        setTimeout(() => {
+            if (window.jadwalPelajaranIps && typeof renderJadwalPelajaranIps === 'function') {
+                renderJadwalPelajaranIps();
+            }
+        }, 100);
+    }
+    
+    if (window.innerWidth < 768 && sidebar && sidebar.classList.contains('active')) {
+        toggleSidebar();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 document.addEventListener('DOMContentLoaded', initializeApp);
 
@@ -222,7 +384,6 @@ function toggleSidebar() {
         });
     }
 }
-
 function showPage(pageId) {
     pages.forEach(page => {
         page.classList.remove('active');
@@ -231,6 +392,7 @@ function showPage(pageId) {
     const targetPage = document.getElementById(pageId);
     if (targetPage) targetPage.classList.add('active');
     
+    // Tampilkan/menyembunyikan hamburger dan theme toggle
     if (hamburger) {
         if (pageId === 'login-page') {
             hamburger.style.display = 'none';
@@ -239,6 +401,19 @@ function showPage(pageId) {
             hamburger.style.display = 'flex';
             if (themeToggle) themeToggle.style.display = 'flex';
         }
+    }
+    
+    // Render jadwal IPS ketika halaman profil wali kelas dibuka
+    if (pageId === 'profil-walas') {
+        // Tunggu sedikit agar DOM benar-benar siap
+        setTimeout(() => {
+            if (window.jadwalPelajaranIps && typeof renderJadwalPelajaranIps === 'function') {
+                console.log('Render jadwal IPS untuk halaman profil wali kelas');
+                renderJadwalPelajaranIps();
+            } else {
+                console.error('Fungsi renderJadwalPelajaranIps tidak tersedia');
+            }
+        }, 300);
     }
     
     if (window.innerWidth < 768 && sidebar && sidebar.classList.contains('active')) {
