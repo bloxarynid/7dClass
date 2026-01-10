@@ -1,26 +1,43 @@
 // Data Kegiatan
 window.kegiatanData = [
+  {
+    title: "Pemilihan Ketua Osis 2026",
+    date: "12 Januari 2026",
+    lokasi: "indoor, Esphero",
+    content: 
+        '<div>' +
+        '<p>Ngapunten bapak/ibu mohon ijin memberikan informasi <strong>Pengumuman Ketentuan PILKETOS, 12 Januari 2026 :</strong></p>' +
+        '<div class="rule">1. Setiap kelas menyiapkan yel dan properti untuk mendukung salah satu kandidat.</div>' +
+        '<div class="rule">2. Menggunakan atasan <strong>batik</strong>, bawahan <strong>hitam</strong> (bahan <strong>kain</strong>, tidak boleh jeans), menggunakan kerudung <strong>segi4</strong>, ciput, kaos kaki esphero, dan sepatu <strong>hitam</strong>.</div>' +
+        '<div class="rule">3. Berangkat sebelum jam 07.00, tas letakan di laci meja kelas dan langsung menuju indoor, uang dan minum dibawa ke indoor, hp di kumpulkan ke wali kelas.</div>' +
+        '<p>Matur nuwun</p>' +
+        '</div>'
+  },{
+    title: "Ketentuan Berpakaian Saat PilKeTos",
+    date: "12 Januari 2026",
+    lokasi: "indoor, Esphero",
+    content: `
+        <div>
+            <p>Ngapunten info tambahan</p>
+            <div class="rule">- <strong>Tidak boleh pakai rok sepan sempit</strong></div>
+            <div class="rule">- <strong>Tidak boleh rok yang press body</strong></div>
+            <div class="rule">- <strong>Tidak boleh rok lilit</strong></div>
+            <div class="rule">- <strong>Tidak boleh pakai rok yang ada belahan belakangnya</strong></div>
+            <div class="rule">- <strong>Kalau bisa yg tanpa motif/gambar</strong></div>
+            <div class="rule">- <strong>Boleh pakai kulot lebar (utk putri)</strong></div>
+            <div class="rule">- <strong>Anak putra tidak boleh pakai celana pensil, celana komprang, celana training</strong></div>
+            
+            <p>Intinya memakai pakaian yang sopan.</p>
+            <p><i>Ajining diri ono ing lathi, ajining rogo ono ing busono</i></p>
+            <p>Dan 1 lagi Pakai atasan batik tidak dimasukkan, baik putra maupun putri.</p>
+        </div>
+    `
+},
     {
         title: "Peringatan Hari Santri Nasional",
         date: "20 Oktober 2025",
         lokasi: "Sekolah",
         content: "Memperingati Hari Santri secara Nasional dengan memakai baju bernuansa (serba) putih."
-    },
-    
-    {
-        title: "Kegiatan Evaluasi Semester Ganjil dan Persiapan Pemilihan Ketua Osis",
-        date: "9 Januari 2026",
-        lokasi: "Indoor, Esphero",content: '<p><em>Assalamualaikum wrwb</em></p>\n\n' +
-'<p>Menginformasikan untuk kegiatan jumpa pakar hari Jum\'at, 9 Januari 2026 adalah <strong>evaluasi kegiatan semester ganjil dan persiapan pilketos</strong> dg ketentuan sebagai berikut:</p>\n\n' + // ← Perhatikan \' di "Jum'at"
-'<ol>\n' +
-'    <li>Setelah bel jam 07.00 Wib seluruh <em>siswa menuju ke indoor</em></li>\n' +
-'    <li>Sholat Jum\'at dimasjid luar sekolah.</li>\n' + // ← Perhatikan \' di "Jum'at"
-'    <li>Keputrian ditiadakan</li>\n' +
-'    <li>Siswa/i berseragam Pramuka lengkap.</li>\n' +
-'</ol>\n\n' +
-'<p>Demikian informasi ini disampaikan, terimakasih.</p>\n\n' +
-'<p><em>Wassalamu\'alaikum wrwb.</em></p>' // ← Perhatikan \' di "Wassalamu'alaikum"
-        
     }
 ];
 
