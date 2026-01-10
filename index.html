@@ -88,6 +88,19 @@
             
             <li class="accordion-item">
                 <div class="accordion-header">
+                    <span><i class="fa-solid fa-user"></i> Tentang</span>
+                    <i class="fas fa-chevron-down accordion-arrow"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul class="sub-menu">
+                        <li onclick="showPage('profil-walas')">Profil Wali Kelas</li>
+                        <li onclick="showPage('esphero-sekolah')">Esphero</li>
+                    </ul>
+                </div>
+            </li>
+            
+            <li class="accordion-item">
+                <div class="accordion-header">
                     <span><i class="fas fa-headset"></i> Hubungi Admin</span>
                     <i class="fas fa-chevron-down accordion-arrow"></i>
                 </div>
@@ -185,6 +198,65 @@
             </div>
         </section>
         
+        <section id="profil-walas" class="page">
+            <h2>Profil Wali Kelas</h2>
+            <div class="wali-kelas">
+              <div class="bingkai-profil">
+                <img class="gambar-walas" src="anggota/icon/absen11.jpg">
+              </div>
+                <h2 class="nama-walas">Sri Lestari</h2>
+                <p class="deskripsi-walas">halo, saya Sri Lestari. Saya adakah salah satu guru di Esphero yang mengajar mata pelajaran IPS <strong>(Ilmu Pengetahuan Sosial)</strong>, serta saya mengajar di kelas 7D</p>
+            </div>
+            
+            <h3 class="title-jadwal-ips">Jadwal Pelajarn IPS Kelas 7</h3>
+            <div class="jadwal-ips-7" id="jadwal-pelajaran-ips">
+            </div>
+        </section>
+        
+        <section id="esphero-sekolah" class="page">
+          <h2>Sekolah Kami</h2>
+          
+          <img src="https://smpn2bara.sch.id/media_library/posts/large/06d7b66f66618b25c7f69963a6eeec1d.jpg" class="gambar-tengah">
+          
+          <h3 class="point-esphero">1. Profil Esphero</h3>
+          <p class="deskripsi-baris">SMP Negeri 2 Banjarnegara yang dikenal oleh masyarakat luas dengan sebutan ESPHERO ( Esempe Loro ), SMP yang menerapkan dan menjunjung tinggi nilai – nilai ketertiban dan kedisiplinan yang beralamatkan di Jl. Tentara Pelajar No 31 Telp ( 0286 ) 591327, semula bernama SMP Jalan Raya , yang kemudian melalui surat keputusan Menteri Pendidikan dan Kebudayaan Nomor : 0264/0/1977 Tanggal 1 April 1977 resmi menjadi SMP Negeri 2 Banjarnegara.</p>
+          <p class="deskripsi-baris">Dalam perjalanan lebih kurang 32 tahun telah mengibarkan eksistensinya sebagai salah satu sekolah yang sarat dengan prestasi akademis dan non akademis, kemudian SMP Negeri 2 Banjarnegara ditetapkan sebagai Sekolah Standar Nasional ( SSN ) oleh Dirjendikdasmen Nomor : 1147 A/C3/SK/2004 dan mulai tahun Pelajaran 2009/ 2010 ditetapkan Dinas Pendidikan Provinsi Jawa Tengah untuk menyelenggarakan kelas Imersi sebagai embrio atau persiapan menuju Rintisan Sekolah Bertaraf Internasional ( RSBI )</p>
+          <p class="deskripsi-baris"><strong>SMP Negeri 2 Banjarnegara memiliki predikat sebagai</strong> :
+            <div>• Sekolah Rujukan</div>
+            <div>• Sekolah Sehat ke-4 se Indonesia</div>
+            <div>• Sekolah Konservasi</div>
+            <div>• Sekolah Berkarakter Kebangsaan</div>
+            <div>• Sekolah Adiwiyata Mandiri</div>
+          </p>
+          <p class="sumber">Sumber <strong><a href="https://smpn2bara.sch.id/read/2/profil" target="_blank">Esphero</a></strong></p>
+          
+          <h3 class="point-esphero">2. Sejarah Singkat Esphero</h4>
+          <p class="deskripsi-baris">Pada tahun 1964 Banjarnegara hanya memiliki satu SMP, yaitu SMP Negeri Banjarnegara. Karena SMP Negeri Banjarnegara tidak dapat menampung tamatan SD Se-Kabupaten Banjarnegara, maka Bapak Soenardi selaku kepala sekolah SMP Negeri Banjarnegara mendirikan SMP Persiapan Negeri 2 Banjarnegara di selatan alun-alun meminjam lokasi lokal (SD Negeri 4 Krandegan). Karena letaknya yang berada ditepi jalan raya, masyarakat menyebutnya “SMP Jalan Raya” dengan Kepala Sekolah yang pertama adalah Bapak Oemar Singgih Adisoesanto(almarhum).</p>
+          <p class="deskripsi-baris">Karena jumlah siswa lulusan SD yang kian bertambah, SMP Persiapan Negeri 2 Banjarnegara memuat tiga ruang kelas lagi. Letak ruang kelas tersebut berada di belakang KODIM, yaitu bekas kandang sapi perah milik seorang dermawan Tionghoa bernama <strong>Dra. Er Che Ong</strong> yang dirombak menjadi tiga ruang kelas. Karena itu, masyarakat sering menyebut SMP Persiapan Negeri 2 Banjarnegara dengan <strong>“SMP Kandang Sapi”</strong>.</p>
+          <p class="description">Namun, ternyata di tempat tersebut juga tidak dapat menampung para siswa yang terus bertambah. Akhirnya, para pendiri mulai mencari lokasi lokal lagi. Yaitu di daerah Brayut. Pendiri bekerja sama dengan kepala Desa Brayut, yaitu Bapak Karno. Lokasinya terletak di gedung LSD dan 1 ruang kelas berada di rumah Carik, Bapak Mastarwo di Desa Brayut tersebut.</p>
+          <p class="deskripsi-baris">Meskipun begitu, ternyata lokasi tersebut tetap saja tidak mencukupi untuk ditempati. Akhirnya, para pendiri mencari tanah disekitar Sokanandi. Ternyata, tanah lungguh di kelurahan Sokanandi di sumbnagkan untuk didirikan sekolah. Sampai sekarang, SMP Negeri 2 Banjarnegara terletak di desa Sokanandi.</p>
+          <p class="deskripsi-baris">Pada tahun 1965, terjadi mutasi guru secara besar-besaran yang disebabkan oleh <strong>GESTAPU (G30SPKI)</strong>. Karena kekurangan guru, Bapak Djuwahir Anom Wijaya diangkat menjadi guru SMP (pada saat itu beliau menjabat sebagai Kepala Sekolah di SD). Namun, pada tahun 1966 beliau menjadi guru SD kembali.</p>
+          <p class="deskripsi-baris">Pada tahun 1974, Bapak  Oemar Singgih Adisoesanto(almarhum) pensiun dan digantikan jabatannya oleh Bapak Moedjamil. Pada saat itu beliau memegang jabatan sebagai Guru SMP Negeri Banajarnegara.</p>
+          <p class="deskripsi-baris">Pada tahun 1975 SMP Persiapan Negeri 2 Banjarnegara ditetapkan menjadi SMP Negeri 2 Banjarnegara. Agar bisa berjalan dengan baik, SMP Negeri 2 Banjarnegara berintegrasi dengan SMP Negeri 1 Banjarnegara. Dengan ketentuan sebagai berikut :
+          <div>1. SMP Negeri 2 Banjarnegara tidak membuka pendaftaran murid baru pada tahun ajaran 1975/1976.</div>
+          <div>2. Pendaftaran murid baru seluruhnya ditangani oleh SMP Negeri 1 Banjarnegara.</div>
+          <div>3. Siswa mantan SMP Persiapan Negeri 2 Banjarnegara yang masih berstatus swasta dicatat sebagai siswa negeri kelas II dan III. Mereka tamat belajar pada 1975 dan 1976.</div>
+          <div>4. Pembagian siswa dilakukan dengan cara  : siswa yang bertempat tinggal di Jl. Veteran kearah barat menjadi siswa SMP Negeri 1 Banjarnegara. Sedangkan siswa yang bertempat tinggal di Jl. Veteran ke arah timur menjadi siswa SMP Negeri 2 Banjarnegara.</div>
+          </p>
+          <p class="deskripsi-baris">Akibat perubahan status SMP Persiapan Negeri 2 Banjarnegara dari swasta ke negeri terjadilah mutasi secara besar-besaran<div>. Berdasarkan ketetntuan berikut :
+          <div>·   Guru-guru yang berstatus guru SD yang tidak memenuhi syarat untuk menjadi guru SMP dikembalikan ke Instansi terkait.</div>
+          <div>·  Guru yang berstatus GTT dipertahankan, bagi tang memenuhi syarat (berijazah minimal PGSLP) diusulkan pengangkatannya sebagai PNS. Sedangkan yang tidak memnuhi syarat (tetapi memiliki ijazah SPG)diusulakan untuk diangkat sebagai PNS bertugas sebagai guru SD.</div>
+          <div>·   Bagi yang tidak memenuhi syarat menjadi guru diserahkan kepada Pemda. Untuk detempatkan sebagai pegawai Pemda.</div></p>
+          <p class="deskripsi-baris">Setelah berstatus negeri, kepada SMP Negeri 2 Banjarnegara dipromosikan <strong>Bapak Slamet Puspawasita (Guru senior dari SMP Negeri 1 Banjarnegara) sebagai Kepala Sekolah dan Bapak Moedjamil sebagai Wakil Kepala Sekolah.</strong></p>
+          <p class="deskripsi-baris">Selain itu, tentang hal kedisiplinan para siswa pun telah dipertimbangkan secara matang sejak menjadi SMP Persiapan Negeri 2 Banjarnegara. Kedisiplinan digalangkan dengan tegas oleh <strong
+          >Bapak Nur’aeni B.A dan Bapak Supalal.</strong></p>
+          <p class="deskripsi-baris">Sejak berstatus negeri pula, SMP 2 Banjarnegara memperoleh prestasi di bidang akademik dan non-akademik dengan presentase tinggi. Disaat itulah SMP Negeri 2 Banjarnegara dan SMP Negeri 1 Banjarnegra mulai bersaing dalam perolehan prestasi.</p>
+          <p class="sumber">Sumber <strong><a href="https://smpn2bara.sch.id/read/9/sejarah-singkat-smpn-2-banjarnegara" target="_blank">Esphero</a></strong></p>
+          
+          <h3 class="point-esphero">3. Lokasi Esphero</h3>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d731.3908344822298!2d109.72373799592897!3d-7.3923089888548965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aa8e626752227%3A0xc081d79dd070061e!2sSMP%20Negeri%202%20Banjarnegara!5e0!3m2!1sen!2sid!4v1768036502980!5m2!1sen!2sid" class="esphero-loc"></iframe>
+        </section>
+        
         <section id="hubungi-admin" class="page">
             <h2>Hubungi Admin</h2>
             <div class="admin-options-container" id="hubungi-admin-container">
@@ -227,7 +299,7 @@
     </div>
     
     <div class="footer-copyright">
-    © @bloxaryn. Dwika
+        © @bloxaryn. Dwika
     </div>
 
     <script src="anggota/daftar-anggota.js"></script>
