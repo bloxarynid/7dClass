@@ -1,6 +1,34 @@
 // Data Tugas
 window.tugasData = [
     {
+        title: "Pengertian Sumber Daya Alam",
+        date: "13 Januari 2026",
+        mapel: "Ilmu Pengetahuan Sosial",
+        content: `<div style="text-align: center; margin: 15px 0;">
+                     <img src="image/tugas4.jpg" alt="Tugas Bahasa Indonesia" 
+                          style="max-width: 100%; height: auto; border-radius: 8px; cursor: pointer;"
+                          onclick="openImageModal('image/tugas4.jpg', 'Tugas Bahasa Indonesia')">
+                     <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                         Klik gambar untuk melihat lebih jelas
+                     </p>
+                  </div>`,
+        status: "Belum Selesai"
+    },
+    {
+        title: "Keberagaman bangsa Indonesia Dalam Bhinneka Tunggal Ika",
+        date: "13 Januari 2026",
+        mapel: "Pendidikan Pancasila",
+        content: `<div style="text-align: center; margin: 15px 0;">
+                     <img src="image/tugas3.jpg" alt="Tugas Bahasa Indonesia" 
+                          style="max-width: 100%; height: auto; border-radius: 8px; cursor: pointer;"
+                          onclick="openImageModal('image/tugas3.jpg', 'Tugas Bahasa Indonesia')">
+                     <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                         Klik gambar untuk melihat lebih jelas
+                     </p>
+                  </div>`,
+        status: "Belum Selesai"
+    },
+    {
         title: "Bahasa Indonesia",
         date: "9 Januari 2026",
         mapel: "Bahasa Indonesia",
@@ -12,7 +40,7 @@ window.tugasData = [
                          Klik gambar untuk melihat lebih jelas
                      </p>
                   </div>`,
-        status: "Belum Selesai"
+        status: "Selesai"
     },
     {
         title: "PR PPKN",
