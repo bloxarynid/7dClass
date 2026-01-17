@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Esphero siap! Halo, teman-teman! Perkenalkan, saya murid kelas 7D Esphero Banjarnegara. Saya sangat semangat dalam pembuatan website ini. Oh ya, perkenalkan, ini adalah website 7DClass dengan fitur-fitur seperti Login, struktur organisasi, daftar anggota, jadwal pelajaran/piket, galeri, dan masih banyak lagi! Website ini masih dalam pengembangan, jadi mohon dimaklumi jika ada UI atau fitur yang mengalami bug/error, dan jika anda menemukan bug atau ingin fitur baru untuk mendatang, anda dapat menghubungi nomor telepon admin yang tertera di dalam website. Terima kasih!">
     <title>Website Kelas 7D - SMPN 2 Banjarnegara</title>
     <meta name="theme-color" content="#7d0d0d">
-    <link rel="icon" type="image/png" href="icon.jpg">
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/1e/0f/e2/1e0fe2627b751756094ef9ef3f6e8fc7.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/mycss.css">
@@ -16,14 +17,11 @@
             <i class="fas fa-school"></i>
             <div>
                 <h1>SMPN 2 Banjarnegara</h1>
-                <p>Kelas 7D - Portal Resmi</p>
+                <p>Kelas 7D - Seven Delightful</p>
             </div>
         </div>
         
         <div class="header-controls">
-            <button class="theme-toggle" id="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
             <button class="hamburger" id="hamburger-btn">
                 <div class="hamburger-line"></div>
                 <div class="hamburger-line"></div>
@@ -88,12 +86,12 @@
             
             <li class="accordion-item">
                 <div class="accordion-header">
-                    <span><i class="fa-solid fa-user"></i> Tentang</span>
+                    <span><i class="fa-solid fa-user"></i> Profil</span>
                     <i class="fas fa-chevron-down accordion-arrow"></i>
                 </div>
                 <div class="accordion-content">
                     <ul class="sub-menu">
-                        <li onclick="showPage('profil-walas')">Profil Wali Kelas</li>
+                        <li onclick="showPage('profil-walas')">Wali Kelas</li>
                         <li onclick="showPage('esphero-sekolah')">Esphero</li>
                     </ul>
                 </div>
@@ -110,6 +108,11 @@
                     </ul>
                 </div>
             </li>
+            
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            
         </ul>
     </nav>
 
@@ -117,7 +120,7 @@
         <section id="login-page" class="page active">
             <div class="login-container">
                 <div class="login-form">
-                    <h2>Login ke Portal Kelas 7D</h2>
+                    <h2>Login</h2>
                     <div class="form-group">
                         <label for="username">Nama Lengkap</label>
                         <input type="text" id="username" placeholder="Masukkan nama lengkap">
@@ -204,7 +207,7 @@
               <div class="bingkai-profil">
                 <img class="gambar-walas" src="anggota/icon/srilestari.jpg">
               </div>
-                <h2 class="nama-walas">Sri Lestari</h2>
+                <h2 class="nama-walas">Sri Lestari S.pd</h2>
                 <p class="deskripsi-walas">halo, saya Sri Lestari. Saya adakah salah satu guru di Esphero yang mengajar mata pelajaran IPS <strong>(Ilmu Pengetahuan Sosial)</strong>, serta saya mengajar di kelas 7D</p>
             </div>
             
